@@ -20,8 +20,8 @@ model = model.float()
 print(model)
 print('Total parameters: %d' % sum([np.prod(p.size()) for p in model.params_trainable]))
 
-train_loader, train_size, data_shape = Loader('train_img40_add', c.batch_size, False)
-val_loader, val_size, data_shape   = Loader('test_img40_add', c.batch_size, False)
+train_loader, train_size, data_shape = Loader('train', c.batch_size, False)
+val_loader, val_size, data_shape     = Loader('val', c.batch_size, False)
 
 N_epochs = c.n_epochs
 t_start = time()

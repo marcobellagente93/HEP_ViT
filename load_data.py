@@ -12,19 +12,19 @@ def read_files(DATAPATH, dataset, verbose=True):
 		if dataset in file:
 			if verbose:
 				print("Reading data from {}".format(file))
-				events = pd.read_hdf(os.path.join(DATAPATH, file), key='table').values
+				events = pd.read_hdf(os.path.join(DATAPATH, file), key='data').values
 
 	return events
 
 def Loader(dataset, batch_size, test):
 
-	datapath = './data/top_tagging'
+	datapath = './data/TopTagging'
 	data = read_files(datapath, dataset)	
 
 	if test == True:
 		split = int(len(data) * 0.01)
 	else:	
-		split = int(len(data) * 0.01)
+		split = int(len(data) * 1.0)
 
 	events=data
 	events_train = events[:split]

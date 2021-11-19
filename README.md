@@ -7,4 +7,4 @@ The data folder only contains a tiny example of 2k images for training and valid
 
 ## Notebooks
 
-We provide a notebook to illustrate the technique
+We will hopefully provide a notebook to illustrate the technique

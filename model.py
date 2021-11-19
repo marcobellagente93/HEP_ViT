@@ -23,7 +23,6 @@ class PreNorm(nn.Module):
 class FeedForward(nn.Module):
 
 	'''Basic FeedForward network'''
-
 	def __init__(self, dim, hidden_dim):
 		super().__init__()
 		self.net = nn.Sequential(
@@ -38,8 +37,7 @@ class FeedForward(nn.Module):
 class Attention(nn.Module):
 
 	'''Attention class'''
-
-	def __init__(self, dim, heads = 8, dim_head = 64):
+	def __init__(self, dim, heads = 1, dim_head = 16):
 		super().__init__()
 		inner_dim = dim_head * heads
 		project_out = not (heads == 1 and dim_head == dim)
@@ -137,7 +135,7 @@ class VisualTransformer(nn.Module):
 		self.optimizer = torch.optim.Adam(self.params_trainable,
 											lr = c.lr,
 											betas = c.betas,
-											#weight_decay = c.weight_decay
+											weight_decay = c.weight_decay 
 											)
 		self.scheduler = torch.optim.lr_scheduler.StepLR(optimizer = self.optimizer,
 														step_size = 1,

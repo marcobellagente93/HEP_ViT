@@ -28,7 +28,7 @@ class FeedForward(nn.Module):
 		super().__init__()
 		self.net = nn.Sequential(
 			nn.Linear(dim, hidden_dim),
-			nn.GELU(), # for whatever reason transformers use GELU, need to check why
+			nn.GELU(), # for whatever reason transformers use GELU, it's completely irrelevant
 			nn.Linear(hidden_dim, dim),
 		)
 
@@ -56,6 +56,7 @@ class Attention(nn.Module):
 
 	def forward(self, x):
 		b, n, _, h = *x.shape, self.heads
+
 		qkv = self.to_qkv(x).chunk(3, dim=-1)
 		q, k, v = map(lambda t: rearrange(t, 'b n (h d) -> b h n d', h = h), qkv)
 
@@ -124,6 +125,7 @@ class VisualTransformer(nn.Module):
 		cls_tokens = repeat(self.cls_token, '() n d -> b n d', b = b)
 
 		x = torch.cat((cls_tokens, x), dim=1)
+
 		x += self.pos_embedding[:, :(n + 1)]
 		x = self.transformer(x)
 		x = x.mean(dim = 1) if self.pool == 'mean' else x[:, 0]
